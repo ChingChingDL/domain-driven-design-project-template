@@ -3,7 +3,7 @@ package world.snowcrystal.template.infrastructure.converter;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import world.snowcrystal.template.domain.user.entity.User;
-import world.snowcrystal.template.domain.user.type.Role;
+import world.snowcrystal.template.domain.user.primitive.Role;
 import world.snowcrystal.template.infrastructure.repository.po.UserPO;
 
 @Mapper(componentModel = "spring")

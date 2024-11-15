@@ -2,13 +2,12 @@ package world.snowcrystal.template.application.assembler;
 
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
+import world.snowcrystal.template.domain.login.command.LoginCommandResponse;
 import world.snowcrystal.template.domain.user.dto.command.UserCreateCommand;
 import world.snowcrystal.template.domain.user.dto.command.UserLoginCommand;
-import world.snowcrystal.template.domain.user.dto.vo.LoginUserVO;
-import world.snowcrystal.template.domain.user.dto.vo.UserVO;
+import world.snowcrystal.template.domain.user.dto.query.UserQueryResponse;
 import world.snowcrystal.template.domain.user.entity.User;
-import world.snowcrystal.template.domain.user.type.Account;
-import world.snowcrystal.template.domain.user.type.Role;
+import world.snowcrystal.template.domain.user.primitive.Role;
 
 @Mapper(componentModel = "spring")
 public interface Assembler {
@@ -32,7 +31,7 @@ public interface Assembler {
     @Mapping(source = "avatar.value", target = "avatar")
     @Mapping(source = "profile.value", target = "profile")
     @Mapping(source = "role.value", target = "role")
-    LoginUserVO toLoginUserVO(User user);
+    LoginCommandResponse toLoginUserVO(User user);
 
 
     @Mapping(source = "username.value", target = "username")
@@ -40,7 +39,7 @@ public interface Assembler {
     @Mapping(source = "avatar.value", target = "avatar")
     @Mapping(source = "profile.value", target = "profile")
     @Mapping(source = "role.value", target = "role")
-    UserVO toUserVO(User user);
+    UserQueryResponse toUserVO(User user);
 
 
 }

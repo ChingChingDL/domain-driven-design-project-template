@@ -1,7 +1,7 @@
 package world.snowcrystal.template.domain.post.dto.vo;
 
 import cn.hutool.json.JSONUtil;
-import world.snowcrystal.template.domain.user.dto.vo.UserVO;
+import world.snowcrystal.template.domain.user.dto.query.UserQueryResponse;
 import world.snowcrystal.template.infrastructure.repository.po.Post;
 import java.io.Serializable;
 import java.util.Date;
@@ -66,7 +66,7 @@ public class PostVO implements Serializable {
     /**
      * 创建人信息
      */
-    private UserVO user;
+    private UserQueryResponse user;
 
     /**
      * 是否已点赞

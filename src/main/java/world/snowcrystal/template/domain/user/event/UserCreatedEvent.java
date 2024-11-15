@@ -2,7 +2,7 @@ package world.snowcrystal.template.domain.user.event;
 
 import lombok.Getter;
 import world.snowcrystal.template.domain.common.event.DomainEvent;
-import world.snowcrystal.template.domain.common.type.Id;
+import world.snowcrystal.template.domain.identifier.primitive.Id;
 
 @Getter
 public class UserCreatedEvent extends DomainEvent {
@@ -12,6 +12,6 @@ public class UserCreatedEvent extends DomainEvent {
     public UserCreatedEvent(Id userId) {
         this.userId = userId;
     }
-    
+
 
 }

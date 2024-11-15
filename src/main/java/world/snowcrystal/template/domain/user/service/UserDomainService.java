@@ -5,14 +5,13 @@ import org.springframework.stereotype.Service;
 import world.snowcrystal.template.domain.common.enums.ApplicationResponseStatusCode;
 import world.snowcrystal.template.domain.common.exception.BusinessException;
 import world.snowcrystal.template.domain.management.dto.command.AdminUserUpdateCommand;
-import world.snowcrystal.template.domain.register.component.PasswordEncoder;
 import world.snowcrystal.template.domain.register.component.UserPasswordGenerator;
 import world.snowcrystal.template.domain.register.component.UsernameGenerator;
 import world.snowcrystal.template.domain.user.entity.User;
 import world.snowcrystal.template.domain.user.repository.UserRepository;
-import world.snowcrystal.template.domain.user.type.Account;
-import world.snowcrystal.template.domain.user.type.Password;
-import world.snowcrystal.template.domain.user.type.Username;
+import world.snowcrystal.template.domain.user.primitive.Account;
+import world.snowcrystal.template.domain.user.primitive.Password;
+import world.snowcrystal.template.domain.user.primitive.Username;
 
 @Service
 public class UserDomainService {

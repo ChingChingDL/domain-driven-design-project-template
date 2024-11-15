@@ -13,9 +13,8 @@ import world.snowcrystal.template.domain.common.enums.SessionAttributeEnum;
 import world.snowcrystal.template.domain.common.exception.BusinessException;
 import world.snowcrystal.template.domain.login.entity.LoginDomainService;
 import world.snowcrystal.template.domain.user.dto.command.UserLoginCommand;
-import world.snowcrystal.template.domain.user.dto.vo.LoginUserVO;
-import world.snowcrystal.template.domain.user.type.Account;
-import world.snowcrystal.template.domain.user.type.Password;
+import world.snowcrystal.template.domain.user.primitive.Account;
+import world.snowcrystal.template.domain.user.primitive.Password;
 
 @Slf4j
 @Component
@@ -25,7 +24,7 @@ public class LoginCommandService {
     private final Assembler assembler;
 
     @Transactional
-    public LoginUserVO userLogin(UserLoginCommand userLoginCommand, HttpServletRequest request) {
+    public LoginCommandResponse userLogin(UserLoginCommand userLoginCommand, HttpServletRequest request) {
         Account account = Account.of(userLoginCommand.getAccount());
         Password password = Password.of(userLoginCommand.getPassword());
         User user = loginDomainService.userLogin(account, password);
@@ -47,14 +46,14 @@ public class LoginCommandService {
     /**
      * 获取当前登录用户
      */
-    public LoginUserVO getLoginUser(HttpServletRequest request) {
+    public LoginCommandResponse getLoginUser(HttpServletRequest request) {
         return assembler.toLoginUserVO(getLoginUserEntity(request));
     }
 
     /**
      * 获取当前登录用户（允许未登录）
      */
-    public LoginUserVO getLoginUserPermitNull(HttpServletRequest request) {
+    public LoginCommandResponse getLoginUserPermitNull(HttpServletRequest request) {
         // 先判断是否已登录
         User user = (User) request.getSession().getAttribute(SessionAttributeEnum.LOGIN_USER.getValue());
         if (user == null) {
@@ -73,7 +72,7 @@ public class LoginCommandService {
     }
 
 
-    public LoginUserVO loginByMpOpen(WxOAuth2UserInfo wxOAuth2UserInfo, HttpServletRequest request) {
+    public LoginCommandResponse loginByMpOpen(WxOAuth2UserInfo wxOAuth2UserInfo, HttpServletRequest request) {
         // 记录用户的登录态
         User user = loginDomainService.loginByMpOpen(wxOAuth2UserInfo);
         request.getSession().setAttribute(SessionAttributeEnum.LOGIN_USER.getValue(), user);

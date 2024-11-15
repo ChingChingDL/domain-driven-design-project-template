@@ -9,8 +9,8 @@ import world.snowcrystal.template.domain.common.enums.ApplicationResponseStatusC
 import world.snowcrystal.template.domain.common.exception.BusinessException;
 import world.snowcrystal.template.domain.register.entity.RegisterDomainService;
 import world.snowcrystal.template.domain.user.repository.UserRepository;
-import world.snowcrystal.template.domain.user.type.Account;
-import world.snowcrystal.template.domain.user.type.Password;
+import world.snowcrystal.template.domain.user.primitive.Account;
+import world.snowcrystal.template.domain.user.primitive.Password;
 
 @Slf4j
 @Component

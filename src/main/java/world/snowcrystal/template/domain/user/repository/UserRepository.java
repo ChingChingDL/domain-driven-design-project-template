@@ -1,19 +1,20 @@
 package world.snowcrystal.template.domain.user.repository;
 
 import world.snowcrystal.template.domain.common.dto.Page;
-import world.snowcrystal.template.domain.common.type.Id;
+import world.snowcrystal.template.domain.identifier.primitive.Id;
 import world.snowcrystal.template.domain.user.dto.query.UserQuery;
 import world.snowcrystal.template.domain.user.entity.User;
-import world.snowcrystal.template.domain.user.type.Account;
-import world.snowcrystal.template.domain.user.type.UnionId;
-import world.snowcrystal.template.domain.user.type.Username;
+import world.snowcrystal.template.domain.user.primitive.Account;
+import world.snowcrystal.template.domain.user.primitive.UnionId;
+import world.snowcrystal.template.domain.user.primitive.Username;
 import world.snowcrystal.template.infrastructure.repository.po.UserPO;
+import  world.snowcrystal.template.domain.common.exception.BusinessException;
 
 public interface UserRepository {
 
     /**
      * 根据id查询用户
-     * @throws world.snowcrystal.template.domain.common.exception.BusinessException 当用户不存在时抛出
+     * @throws BusinessException 当用户不存在时抛出
      */
     User load(Id id);
 
@@ -25,17 +26,17 @@ public interface UserRepository {
 
     void save(User user);
 
-    void delete(Id id);
+    void remove(Id id);
 
-    void delete(Account account);
+    void remove(Account account);
 
-    void delete(Username username);
+    void remove(Username username);
 
-    void delete(User user);
+    void remove(User user);
 
-    Page<User> findAll(long current, long size);
+    Page<User> loadBatch(long current, long size);
 
-    Page<UserPO> findAll(UserQuery query);
+    Page<UserPO> loadBatch(UserQuery query);
     /**
      * 检查用户名是否已经存在
      *

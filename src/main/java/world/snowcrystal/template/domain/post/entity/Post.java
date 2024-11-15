@@ -1,18 +1,21 @@
 package world.snowcrystal.template.domain.post.entity;
 
-import com.baomidou.mybatisplus.annotation.*;
-import lombok.Data;
-import world.snowcrystal.template.domain.common.type.Id;
-import world.snowcrystal.template.domain.post.type.Title;
+import com.baomidou.mybatisplus.annotation.TableField;
+import lombok.Builder;
+import lombok.Getter;
+import world.snowcrystal.template.domain.identifier.primitive.Id;
+import world.snowcrystal.template.domain.post.type.*;
 
 import java.io.Serial;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 /**
  * 文章
  */
-@Data
+@Getter
+@Builder
 public class Post implements Serializable {
 
     /**
@@ -28,22 +31,22 @@ public class Post implements Serializable {
     /**
      * 内容
      */
-    private String content;
+    private Content content;
 
     /**
-     * 标签列表 json
+     * 标签列表
      */
-    private String tags;
+    private List<Tag> tags;
 
     /**
      * 点赞数
      */
-    private Integer thumbNum;
+    private Likes likes;
 
     /**
      * 收藏数
      */
-    private Integer favourNum;
+    private Favours favourNum;
 
     /**
      * 创建用户 id
@@ -64,6 +67,40 @@ public class Post implements Serializable {
      * 是否删除
      */
     private Integer deleted;
+
+
+    public void incrementLikes() {
+        this.likes = new Likes(this.likes.getValue() + 1);
+    }
+
+    public void decrementLikes() {
+        this.likes = new Likes(Math.max(0, this.likes.getValue() - 1));
+    }
+
+    public void incrementFavours() {
+        this.favourNum = new Favours(this.favourNum.getValue() + 1);
+    }
+
+    public void decrementFavours() {
+        this.favourNum = new Favours(Math.max(0, this.favourNum.getValue() - 1));
+    }
+
+    public void addTag(Tag tag) {
+        this.tags.add(tag);
+    }
+
+    public void removeTag(Tag tag) {
+        this.tags.remove(tag);
+    }
+
+    public void changeTitle(Title newTitle) {
+        this.title = newTitle;
+    }
+
+    public void modifyContent(Content newContent) {
+        this.content = newContent;
+    }
+
 
     @TableField(exist = false)
     @Serial

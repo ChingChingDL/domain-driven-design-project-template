@@ -3,6 +3,7 @@ package world.snowcrystal.template.infrastructure.component;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import world.snowcrystal.template.domain.identifier.component.SnowFlakeIdentifierGenerator;
 import world.snowcrystal.template.domain.register.component.PasswordEncoder;
 import world.snowcrystal.template.domain.register.component.UserPasswordGenerator;
 import world.snowcrystal.template.domain.register.component.UsernameGenerator;
@@ -26,5 +27,11 @@ public class ComponentConfiguration {
     @ConditionalOnMissingBean(UsernameGenerator.class)
     public UsernameGenerator usernameGenerator() {
         return new DefaultUsernameGenerator();
+    }
+
+    @Bean
+    @ConditionalOnMissingBean(SnowFlakeIdentifierGenerator.class)
+    public SnowFlakeIdentifierGenerator snowFlakeIdentifierGenerator() {
+        return new DefaultSnowFlakeGenerator();
     }
 }

@@ -5,9 +5,9 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
-import world.snowcrystal.template.domain.common.type.Id;
+import world.snowcrystal.template.domain.identifier.primitive.Id;
 import world.snowcrystal.template.domain.user.enums.UserRoleEnum;
-import world.snowcrystal.template.domain.user.type.*;
+import world.snowcrystal.template.domain.user.primitive.*;
 
 import java.io.Serial;
 import java.io.Serializable;

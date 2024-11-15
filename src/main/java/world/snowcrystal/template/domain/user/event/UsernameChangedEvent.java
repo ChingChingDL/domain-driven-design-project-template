@@ -1,10 +1,9 @@
 package world.snowcrystal.template.domain.user.event;
 
-import lombok.Builder;
 import lombok.Getter;
 import world.snowcrystal.template.domain.common.event.DomainEvent;
-import world.snowcrystal.template.domain.common.type.Id;
-import world.snowcrystal.template.domain.user.type.Username;
+import world.snowcrystal.template.domain.identifier.primitive.Id;
+import world.snowcrystal.template.domain.user.primitive.Username;
 
 @Getter
 public class UsernameChangedEvent extends DomainEvent {

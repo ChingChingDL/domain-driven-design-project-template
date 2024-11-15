@@ -9,13 +9,13 @@ import world.snowcrystal.template.application.assembler.Assembler;
 import world.snowcrystal.template.domain.common.enums.ApplicationResponseStatusCode;
 import world.snowcrystal.template.domain.common.enums.SessionAttributeEnum;
 import world.snowcrystal.template.domain.common.exception.BusinessException;
-import world.snowcrystal.template.domain.common.type.Id;
+import world.snowcrystal.template.domain.identifier.primitive.Id;
 import world.snowcrystal.template.domain.management.dto.command.AdminUserUpdateCommand;
 import world.snowcrystal.template.domain.user.entity.User;
 import world.snowcrystal.template.domain.user.entity.UserFactory;
 import world.snowcrystal.template.domain.user.repository.UserRepository;
 import world.snowcrystal.template.domain.user.service.UserDomainService;
-import world.snowcrystal.template.domain.user.type.Username;
+import world.snowcrystal.template.domain.user.primitive.Username;
 
 /**
  * 用户服务实现
@@ -46,7 +46,7 @@ public class UserCommandService {
 
     @Transactional
     public void deleteUser(Id userId) {
-        userRepository.delete(userId);
+        userRepository.remove(userId);
     }
 
 

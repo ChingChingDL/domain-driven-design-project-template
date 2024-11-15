@@ -1,10 +1,9 @@
 package world.snowcrystal.template.infrastructure.component;
 
 import cn.hutool.crypto.digest.DigestUtil;
-import org.springframework.stereotype.Component;
 import world.snowcrystal.template.domain.register.component.PasswordEncoder;
-import world.snowcrystal.template.domain.user.type.EncodedPassword;
-import world.snowcrystal.template.domain.user.type.Password;
+import world.snowcrystal.template.domain.user.primitive.EncodedPassword;
+import world.snowcrystal.template.domain.user.primitive.Password;
 
 
 public class DefaultPasswordEncoder implements PasswordEncoder {

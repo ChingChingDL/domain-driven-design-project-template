@@ -9,15 +9,15 @@ import world.snowcrystal.template.domain.common.exception.BusinessException;
 import world.snowcrystal.template.domain.register.entity.RegisterDomainService;
 import world.snowcrystal.template.domain.user.entity.User;
 import world.snowcrystal.template.domain.user.repository.UserRepository;
-import world.snowcrystal.template.domain.user.type.*;
+import world.snowcrystal.template.domain.user.primitive.*;
 
 
 @Slf4j
 @Component
 @RequiredArgsConstructor
 public class LoginDomainService {
-    private final UserRepository userRepository;
 
+    private final UserRepository userRepository;
     private final RegisterDomainService registerDomainService;
 
 

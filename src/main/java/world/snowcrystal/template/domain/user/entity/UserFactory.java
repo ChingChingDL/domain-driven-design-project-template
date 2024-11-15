@@ -10,7 +10,7 @@ import world.snowcrystal.template.domain.register.component.UsernameGenerator;
 import world.snowcrystal.template.domain.user.dto.command.UserCreateCommand;
 import world.snowcrystal.template.domain.user.exception.AccountTakenException;
 import world.snowcrystal.template.domain.user.repository.UserRepository;
-import world.snowcrystal.template.domain.user.type.*;
+import world.snowcrystal.template.domain.user.primitive.*;
 
 
 /**

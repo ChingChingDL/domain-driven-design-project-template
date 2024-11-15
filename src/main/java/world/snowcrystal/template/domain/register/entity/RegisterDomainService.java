@@ -4,9 +4,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import world.snowcrystal.template.domain.user.entity.User;
 import world.snowcrystal.template.domain.user.entity.UserFactory;
-import world.snowcrystal.template.domain.user.type.Account;
-import world.snowcrystal.template.domain.user.type.Password;
-import world.snowcrystal.template.domain.user.type.Username;
+import world.snowcrystal.template.domain.user.primitive.Account;
+import world.snowcrystal.template.domain.user.primitive.Password;
+import world.snowcrystal.template.domain.user.primitive.Username;
 
 @Service
 @RequiredArgsConstructor

@@ -1,10 +1,8 @@
 package world.snowcrystal.template.infrastructure.component;
 
 import cn.hutool.core.util.RandomUtil;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
-import org.springframework.stereotype.Component;
 import world.snowcrystal.template.domain.register.component.UsernameGenerator;
-import world.snowcrystal.template.domain.user.type.Username;
+import world.snowcrystal.template.domain.user.primitive.Username;
 
 public class DefaultUsernameGenerator implements UsernameGenerator {
     /**

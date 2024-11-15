@@ -8,9 +8,7 @@ import world.snowcrystal.template.domain.common.dto.Page;
 import world.snowcrystal.template.domain.common.exception.ThrowUtils;
 import world.snowcrystal.template.domain.user.entity.User;
 import world.snowcrystal.template.domain.common.enums.ApplicationResponseStatusCode;
-import world.snowcrystal.template.domain.common.exception.BusinessException;
-import world.snowcrystal.template.domain.common.type.Id;
-import world.snowcrystal.template.domain.user.dto.vo.UserVO;
+import world.snowcrystal.template.domain.identifier.primitive.Id;
 import world.snowcrystal.template.domain.user.repository.UserRepository;
 import world.snowcrystal.template.domain.user.service.UserDomainService;
 import world.snowcrystal.template.infrastructure.repository.po.UserPO;
@@ -34,7 +32,7 @@ public class UserQueryService {
     private Assembler assembler;
 
 
-    public UserVO getUserVO(Id id) {
+    public UserQueryResponse getUserVO(Id id) {
         User user = userRepository.load(id);
         return assembler.toUserVO(user);
 
@@ -43,7 +41,7 @@ public class UserQueryService {
      * 获取脱敏的用户信息
      */
 
-    public List<UserVO> getUserVO(List<User> userList) {
+    public List<UserQueryResponse> getUserVO(List<User> userList) {
         return List.of();
     }
 
@@ -54,11 +52,11 @@ public class UserQueryService {
 
 
     public Page<UserPO> page(UserQuery userQueryRequest) {
-        return userRepository.findAll(userQueryRequest);
+        return userRepository.loadBatch(userQueryRequest);
     }
 
 
-    public Page<UserVO> pageVO(UserQuery userQueryRequest) {
+    public Page<UserQueryResponse> pageVO(UserQuery userQueryRequest) {
         // rate limiter
         long size = userQueryRequest.getSize();
         // 限制爬虫

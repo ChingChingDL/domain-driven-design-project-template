@@ -10,13 +10,13 @@ import world.snowcrystal.template.domain.common.dto.Page;
 import world.snowcrystal.template.domain.common.enums.ApplicationResponseStatusCode;
 import world.snowcrystal.template.domain.common.enums.SortOrderEnum;
 import world.snowcrystal.template.domain.common.exception.BusinessException;
-import world.snowcrystal.template.domain.common.type.Id;
+import world.snowcrystal.template.domain.identifier.primitive.Id;
 import world.snowcrystal.template.domain.user.dto.query.UserQuery;
 import world.snowcrystal.template.domain.user.entity.User;
 import world.snowcrystal.template.domain.user.repository.UserRepository;
-import world.snowcrystal.template.domain.user.type.Account;
-import world.snowcrystal.template.domain.user.type.UnionId;
-import world.snowcrystal.template.domain.user.type.Username;
+import world.snowcrystal.template.domain.user.primitive.Account;
+import world.snowcrystal.template.domain.user.primitive.UnionId;
+import world.snowcrystal.template.domain.user.primitive.Username;
 import world.snowcrystal.template.infrastructure.converter.EntityConverter;
 import world.snowcrystal.template.infrastructure.repository.mapper.UserMapper;
 import world.snowcrystal.template.infrastructure.repository.po.UserPO;
@@ -79,26 +79,26 @@ public class UserRepositoryImpl extends ServiceImpl<UserMapper, UserPO>
 
 
     @Override
-    public void delete(Id id) {
+    public void remove(Id id) {
         userMapper.deleteById(id.getValue());
     }
 
     @Override
-    public void delete(Account account) {
+    public void remove(Account account) {
         QueryWrapper<UserPO> wrapper = new QueryWrapper<>();
         wrapper.eq("account", account.getValue());
         userMapper.delete(wrapper);
     }
 
     @Override
-    public void delete(Username username) {
+    public void remove(Username username) {
         QueryWrapper<UserPO> wrapper = new QueryWrapper<>();
         wrapper.eq("username", username.getValue());
         userMapper.delete(wrapper);
     }
 
     @Override
-    public void delete(User user) {
+    public void remove(User user) {
         UserPO po = entityConverter.toPO(user);
         QueryWrapper<UserPO> wrapper = new QueryWrapper<>();
         wrapper.eq("id", po.getId());
@@ -106,7 +106,7 @@ public class UserRepositoryImpl extends ServiceImpl<UserMapper, UserPO>
     }
 
     @Override
-    public Page<User> findAll(long current, long size) {
+    public Page<User> loadBatch(long current, long size) {
         QueryWrapper<UserPO> queryWrapper = new QueryWrapper<>();
         queryWrapper.eq("deleted", 0);
         com.baomidou.mybatisplus.extension.plugins.pagination.Page<UserPO> page
@@ -126,7 +126,7 @@ public class UserRepositoryImpl extends ServiceImpl<UserMapper, UserPO>
     }
 
     @Override
-    public Page<UserPO> findAll(UserQuery query) {
+    public Page<UserPO> loadBatch(UserQuery query) {
         QueryWrapper<UserPO> queryWrapper = getQueryWrapper(query);
         queryWrapper.eq("deleted", 0);
         com.baomidou.mybatisplus.extension.plugins.pagination.Page<UserPO> page
