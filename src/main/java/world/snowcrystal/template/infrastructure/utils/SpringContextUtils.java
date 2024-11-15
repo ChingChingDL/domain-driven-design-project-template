@@ -4,7 +4,6 @@ import jakarta.validation.constraints.NotNull;
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
-import org.springframework.stereotype.Component;
 
 /**
  * Spring 上下文获取工具

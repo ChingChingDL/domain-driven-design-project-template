@@ -3,9 +3,10 @@ package world.snowcrystal.template.infrastructure.file;
 import com.qcloud.cos.COSClient;
 import com.qcloud.cos.model.PutObjectRequest;
 import com.qcloud.cos.model.PutObjectResult;
-import world.snowcrystal.template.domain.common.properties.ObjectStorageProperties;
-import java.io.File;
 import jakarta.annotation.Resource;
+import world.snowcrystal.template.domain.common.properties.ObjectStorageProperties;
+
+import java.io.File;
 
 /**
  * Cos 对象存储操作

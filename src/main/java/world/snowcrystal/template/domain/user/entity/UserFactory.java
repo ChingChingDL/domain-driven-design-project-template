@@ -4,10 +4,11 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import world.snowcrystal.template.domain.common.enums.ApplicationResponseStatusCode;
 import world.snowcrystal.template.domain.common.exception.BusinessException;
-import world.snowcrystal.template.domain.user.exception.AccountTakenException;
+import world.snowcrystal.template.domain.register.component.PasswordEncoder;
 import world.snowcrystal.template.domain.register.component.UserPasswordGenerator;
 import world.snowcrystal.template.domain.register.component.UsernameGenerator;
 import world.snowcrystal.template.domain.user.dto.command.UserCreateCommand;
+import world.snowcrystal.template.domain.user.exception.AccountTakenException;
 import world.snowcrystal.template.domain.user.repository.UserRepository;
 import world.snowcrystal.template.domain.user.type.*;
 
@@ -25,6 +26,8 @@ public class UserFactory {
     private final UserRepository userRepository;
     private final UserPasswordGenerator passwordGenerator;
     private final UsernameGenerator usernameGenerator;
+    private final PasswordEncoder passwordEncoder;
+
 
     public User create(Username username, Account account, Avatar avatar) {
         if (userRepository.checkExists(account)) {
@@ -34,7 +37,7 @@ public class UserFactory {
                 .username(username)
                 .account(account)
                 .avatar(avatar)
-                .password(User.encode(passwordGenerator.generate()))
+                .password(passwordEncoder.encode(passwordGenerator.generate()))
                 .build();
     }
 
@@ -53,7 +56,7 @@ public class UserFactory {
         return User.builder()
                 .account(account)
                 .username(usernameGenerator.generate())
-                .password(User.encode(password))
+                .password(passwordEncoder.encode(password))
                 .build();
     }
 
@@ -64,7 +67,7 @@ public class UserFactory {
         return User.builder()
                 .account(account)
                 .username(username)
-                .password(User.encode(password))
+                .password(passwordEncoder.encode(password))
                 .build();
     }
 
@@ -77,7 +80,7 @@ public class UserFactory {
                 .avatar(avatar)
                 .role(Role.of(role))
                 .username(usernameGenerator.generate())
-                .password(User.encode(passwordGenerator.generate()))
+                .password(passwordEncoder.encode(passwordGenerator.generate()))
                 .build();
     }
 
@@ -85,7 +88,7 @@ public class UserFactory {
 
         return User.builder()
                 .username(username)
-                .password(User.encode(passwordGenerator.generate()))
+                .password(passwordEncoder.encode(passwordGenerator.generate()))
                 .build();
     }
 

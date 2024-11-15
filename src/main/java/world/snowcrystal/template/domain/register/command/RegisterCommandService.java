@@ -36,7 +36,6 @@ public class RegisterCommandService {
         }
         synchronized (account.getValue().intern()) {
             User user = registerDomainService.createUser(account, password);
-            user.setPassword(password);
             // 插入数据
             userRepository.save(user);
             return RegisterResponse.builder().userId(user.getId().getValue()).build();

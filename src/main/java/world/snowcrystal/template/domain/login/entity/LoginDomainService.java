@@ -25,7 +25,7 @@ public class LoginDomainService {
         // 查询用户是否存在
         User user = userRepository.load(account);
         // 用户存在检查，密码检查
-        if (user == null || !user.matches(password)) {
+        if (user == null || !user.passwordMatches(password)) {
             log.info("user login failed, account cannot match password");
             throw new BusinessException(ApplicationResponseStatusCode.PARAMS_ERROR, "用户不存在或密码错误");
         }

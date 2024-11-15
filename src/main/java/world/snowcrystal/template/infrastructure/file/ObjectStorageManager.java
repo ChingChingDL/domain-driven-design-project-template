@@ -3,11 +3,11 @@ package world.snowcrystal.template.infrastructure.file;
 import com.qcloud.cos.COSClient;
 import com.qcloud.cos.model.PutObjectRequest;
 import com.qcloud.cos.model.PutObjectResult;
+import jakarta.annotation.Resource;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.stereotype.Component;
 import world.snowcrystal.template.domain.common.properties.ObjectStorageProperties;
 
-import jakarta.annotation.Resource;
 import java.io.File;
 
 /**

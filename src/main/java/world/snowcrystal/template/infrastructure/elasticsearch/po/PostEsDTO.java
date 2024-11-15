@@ -2,14 +2,13 @@ package world.snowcrystal.template.infrastructure.elasticsearch.po;
 
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.json.JSONUtil;
-import world.snowcrystal.template.infrastructure.repository.po.Post;
 import lombok.Data;
-
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.elasticsearch.annotations.Field;
 import org.springframework.data.elasticsearch.annotations.FieldType;
+import world.snowcrystal.template.infrastructure.repository.po.Post;
 
 import java.io.Serial;
 import java.io.Serializable;

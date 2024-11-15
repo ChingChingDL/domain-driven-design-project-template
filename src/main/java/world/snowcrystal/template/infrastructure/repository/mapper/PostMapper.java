@@ -2,6 +2,7 @@ package world.snowcrystal.template.infrastructure.repository.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import world.snowcrystal.template.infrastructure.repository.po.Post;
+
 import java.util.Date;
 import java.util.List;
 

@@ -5,8 +5,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
-import org.springframework.util.DigestUtils;
-import world.snowcrystal.template.domain.common.type.*;
+import world.snowcrystal.template.domain.common.type.Id;
 import world.snowcrystal.template.domain.user.enums.UserRoleEnum;
 import world.snowcrystal.template.domain.user.type.*;
 
@@ -20,10 +19,6 @@ import java.util.Date;
 @Getter
 @Builder
 public class User implements Serializable {
-    /**
-     * 盐值，混淆密码
-     */
-    public static final String SALT = "TechnologyMillennium";
 
     /**
      * id
@@ -38,10 +33,10 @@ public class User implements Serializable {
     private Account account;
 
     /**
-     * 用户密码
+     * 被加密后的用户密码
      */
     @Nonnull
-    private Password password;
+    private EncodedPassword password;
 
     /**
      * 开放平台id
@@ -112,8 +107,8 @@ public class User implements Serializable {
         this.deleted = 1;
     }
 
-    public User changePassword(Password password) {
-        this.password = encode(password);
+    public User changePassword(EncodedPassword password) {
+        this.password = password;
         return this;
     }
 
@@ -148,6 +143,7 @@ public class User implements Serializable {
         this.role = Role.of(userRole);
         return this;
     }
+
     public User changeUserRole(String userRole) {
         return changeUserRole(UserRoleEnum.getEnumByValue(userRole));
     }
@@ -156,7 +152,11 @@ public class User implements Serializable {
         return UserRoleEnum.ADMIN.equals(this.role.getValue());
     }
 
-    public boolean activate() {
+    public boolean passwordMatches(Password rawPassword) {
+        return this.password.matches(rawPassword);
+    }
+
+    public boolean isActivate() {
         return this.deleted == 0;
     }
 
@@ -168,25 +168,6 @@ public class User implements Serializable {
         this.unionId = unionId;
         this.mpOpenId = mpOpenId;
     }
-
-    /**
-     * @param password 未被加密的密码哦
-     * @return true 如果密码匹配
-     */
-    public boolean matches(Password password) {
-        return this.password.equals(encode(password));
-    }
-
-    public User setPassword(Password password) {
-        this.password = encode(password);
-        return this;
-    }
-
-
-    public static Password encode(Password password) {
-        return new Password(DigestUtils.md5DigestAsHex((SALT + password).getBytes()));
-    }
-
 
 //    public void setDeleted(@Nonnull Integer deleted) {
 //        this.deleted = deleted;

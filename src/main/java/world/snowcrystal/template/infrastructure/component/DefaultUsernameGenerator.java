@@ -6,8 +6,6 @@ import org.springframework.stereotype.Component;
 import world.snowcrystal.template.domain.register.component.UsernameGenerator;
 import world.snowcrystal.template.domain.user.type.Username;
 
-@Component("usernameGenerator")
-//@ConditionalOnMissingBean(UsernameGenerator.class)
 public class DefaultUsernameGenerator implements UsernameGenerator {
     /**
      * 随机昵称 形容词

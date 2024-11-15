@@ -1,7 +1,8 @@
 package world.snowcrystal.template.infrastructure.elasticsearch.po;
 
-import java.util.List;
 import org.springframework.data.elasticsearch.repository.ElasticsearchRepository;
+
+import java.util.List;
 
 /**
  * 文章 ES 操作

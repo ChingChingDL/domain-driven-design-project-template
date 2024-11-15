@@ -5,7 +5,6 @@ import lombok.Data;
 import world.snowcrystal.template.domain.common.command.Command;
 
 import java.io.Serial;
-import java.io.Serializable;
 
 /**
  * 用户注册请求体

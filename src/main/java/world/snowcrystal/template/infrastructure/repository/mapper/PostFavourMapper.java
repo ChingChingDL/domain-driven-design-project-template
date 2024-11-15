@@ -5,9 +5,9 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.Constants;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import org.apache.ibatis.annotations.Param;
 import world.snowcrystal.template.infrastructure.repository.po.Post;
 import world.snowcrystal.template.infrastructure.repository.po.PostFavour;
-import org.apache.ibatis.annotations.Param;
 
 /**
  * 文章收藏数据库操作
