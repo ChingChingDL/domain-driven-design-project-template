@@ -6,13 +6,11 @@ import lombok.Data;
 import world.snowcrystal.template.domain.common.query.Query;
 
 /**
- * 文章收藏数量查询
+ * 文章点赞数量查询
  */
 @Data
-public class PostFavouriteQuery implements Query {
-
+public class PostLikeQuery implements Query {
     @Nonnull
     @Min(0)
     private Long postId;
-
 }

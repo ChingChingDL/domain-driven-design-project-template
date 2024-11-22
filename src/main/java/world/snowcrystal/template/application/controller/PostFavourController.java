@@ -4,14 +4,10 @@ import jakarta.annotation.Nonnull;
 import jakarta.annotation.Resource;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import world.snowcrystal.template.domain.common.ApplicationResponse;
 import world.snowcrystal.template.domain.common.dto.Page;
-import world.snowcrystal.template.domain.favorite.dto.command.FavouriteCommandService;
-import world.snowcrystal.template.domain.favorite.dto.command.PostFavourAddCommand;
+import world.snowcrystal.template.domain.favorite.dto.command.*;
 import world.snowcrystal.template.domain.favorite.dto.query.FavouriteQueryService;
 import world.snowcrystal.template.domain.favorite.dto.query.UserFavouriteQuery;
 import world.snowcrystal.template.domain.post.assembler.PostAssembler;
@@ -40,11 +36,10 @@ public class PostFavourController {
      * @return resultNum 收藏变化数
      */
     @PostMapping("/")
-    public ApplicationResponse<Long> doPostFavour(
+    public ApplicationResponse<PostFavouriteResponse> doPostFavour(
             @Nonnull @RequestBody PostFavourAddCommand postFavourAddCommand,
             HttpServletRequest request) {
-        Long l = favouriteCommandService.doPostFavour(postFavourAddCommand, request);
-        return ApplicationResponse.success(l);
+        return ApplicationResponse.success(favouriteCommandService.doPostFavour(postFavourAddCommand, request));
         // region old
 //        User loginUser = loginCommandService.getLoginUserEntity(request);
         // 登录才能操作
@@ -53,6 +48,18 @@ public class PostFavourController {
 ////        int result = postFavourService.doPostFavour(postId, loginUser);
 //        return ApplicationResponse.success(0);
         // endregion old
+    }
+
+    /**
+     * 取消收藏某一篇文章
+     *
+     * @return resultNum 收藏变化数
+     */
+    @DeleteMapping("/")
+    public ApplicationResponse<PostFavouriteCancelResponse> cancelFavourite(
+            @Nonnull @RequestBody PostFavouriteCancelCommand postFavouriteCancelCommand,
+            HttpServletRequest request) {
+        return ApplicationResponse.success(favouriteCommandService.cancelFavour(postFavouriteCancelCommand, request));
     }
 
     /**

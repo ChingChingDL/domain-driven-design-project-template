@@ -48,21 +48,6 @@ public class PostCommandService {
         postRepository.save(post);
     }
 
-    @Transactional
-    public Favours favour(PostFavourAddCommand postFavourAddCommand) {
-        Post post = postRepository.load(Id.of(postFavourAddCommand.getPostId()), Id.of(postFavourAddCommand.getUserId()));
-        Favours favours = post.incrementFavoursAndGet();
-        postRepository.save(post);
-        return favours;
-    }
-
-    @Transactional
-    public Likes like(PostLikeAddCommand postLikeAddCommand) {
-        Post post = postRepository.load(Id.of(postLikeAddCommand.getPostId()), Id.of(postLikeAddCommand.getUserId()));
-        Likes likes = post.incrementLikesAndGet();
-        postRepository.save(post);
-        return likes;
-    }
 
     @Transactional
     public Post editPost(PostEditCommand postEditCommand,HttpServletRequest request) {
