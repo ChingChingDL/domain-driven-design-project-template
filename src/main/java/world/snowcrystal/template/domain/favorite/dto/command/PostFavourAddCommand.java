@@ -1,4 +1,4 @@
-package world.snowcrystal.template.domain.post.dto.command;
+package world.snowcrystal.template.domain.favorite.dto.command;
 
 import jakarta.validation.constraints.Min;
 import lombok.Data;
@@ -17,9 +17,6 @@ public class PostFavourAddCommand implements Command {
      */
     @Min(0)
     private Long postId;
-
-    @Min(0)
-    private Long userId;
 
     @Serial
     private static final long serialVersionUID = 1L;

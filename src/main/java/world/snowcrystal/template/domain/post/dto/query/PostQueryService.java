@@ -29,7 +29,7 @@ public class PostQueryService {
 
     public Page<PostQueryResponse> page(PostQuery postQueryRequest) {
         List<PostQueryResponse> list = Optional
-                .ofNullable(postRepository.searchPage(postQueryRequest))
+                .ofNullable(postRepository.listPage(postQueryRequest))
                 .orElse(Page.empty(Post.class)).stream()
                 .map(postAssembler::toQueryResponse).toList();
         return Page.<PostQueryResponse>builder().records(list).build();

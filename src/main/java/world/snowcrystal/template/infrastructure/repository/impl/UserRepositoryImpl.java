@@ -13,15 +13,16 @@ import world.snowcrystal.template.domain.common.exception.BusinessException;
 import world.snowcrystal.template.domain.identifier.primitive.Id;
 import world.snowcrystal.template.domain.user.dto.query.UserQuery;
 import world.snowcrystal.template.domain.user.entity.User;
-import world.snowcrystal.template.domain.user.repository.UserRepository;
 import world.snowcrystal.template.domain.user.primitive.Account;
 import world.snowcrystal.template.domain.user.primitive.UnionId;
 import world.snowcrystal.template.domain.user.primitive.Username;
+import world.snowcrystal.template.domain.user.repository.UserRepository;
 import world.snowcrystal.template.infrastructure.converter.UserConverter;
 import world.snowcrystal.template.infrastructure.repository.mapper.UserMapper;
 import world.snowcrystal.template.infrastructure.repository.po.UserPO;
 import world.snowcrystal.template.infrastructure.utils.SqlUtils;
 
+import java.util.List;
 import java.util.stream.Collectors;
 
 @Repository("userRepository")
@@ -34,7 +35,6 @@ public class UserRepositoryImpl extends ServiceImpl<UserMapper, UserPO>
 
     @Resource
     private UserConverter userConverter;
-
 
 
     @Override
@@ -70,6 +70,12 @@ public class UserRepositoryImpl extends ServiceImpl<UserMapper, UserPO>
         queryWrapper.eq("unionId", unionId.getValue())
                 .eq("deleted", 0);
         return userConverter.toEntity(userMapper.selectOne(queryWrapper));
+    }
+
+    @Override
+    public List<User> loadBatch(List<Id> ids) {
+        return listByIds(ids.stream().map(Id::getValue).distinct().toList())
+                .stream().map(userConverter::toEntity).collect(Collectors.toList());
     }
 
     @Override

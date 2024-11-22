@@ -1,4 +1,4 @@
-package world.snowcrystal.template.domain.post.dto.command;
+package world.snowcrystal.template.domain.like.dto.command;
 
 import jakarta.validation.constraints.Min;
 import lombok.Data;

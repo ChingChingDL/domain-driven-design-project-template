@@ -2,6 +2,7 @@ package world.snowcrystal.template.domain.common.dto;
 
 
 import lombok.Builder;
+import lombok.Getter;
 
 import java.io.Serial;
 import java.io.Serializable;
@@ -9,6 +10,7 @@ import java.util.List;
 import java.util.stream.Stream;
 
 @Builder
+@Getter
 public class Page<T> implements Serializable {
 
     private List<T> records;

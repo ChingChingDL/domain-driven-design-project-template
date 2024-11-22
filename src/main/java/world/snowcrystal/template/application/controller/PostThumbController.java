@@ -10,14 +10,11 @@ import world.snowcrystal.template.domain.common.ApplicationResponse;
 import world.snowcrystal.template.domain.common.enums.ApplicationResponseStatusCode;
 import world.snowcrystal.template.domain.common.exception.BusinessException;
 import world.snowcrystal.template.domain.login.command.LoginCommandService;
-import world.snowcrystal.template.domain.post.dto.command.PostLikeAddCommand;
+import world.snowcrystal.template.domain.like.dto.command.PostLikeAddCommand;
 import world.snowcrystal.template.domain.user.entity.User;
 
 /**
  * 文章点赞接口
- *
- *
- *
  */
 //@RestController
 @RequestMapping("/post_thumb")

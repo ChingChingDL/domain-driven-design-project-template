@@ -153,8 +153,7 @@ public class PostController {
      */
     @PostMapping("/search/page/vo")
     public ApplicationResponse<Page<PostQueryResponse>> searchPostVOByPage(@RequestBody PostQuery postQueryRequest) {
-        Page<PostQueryResponse> page = postQueryService.page(postQueryRequest);
-        return ApplicationResponse.success(page);
+        return ApplicationResponse.success(postQueryService.page(postQueryRequest));
 
         // region old
         // 限制爬虫

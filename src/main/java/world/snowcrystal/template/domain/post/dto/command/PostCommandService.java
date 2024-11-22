@@ -5,6 +5,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import world.snowcrystal.template.domain.common.command.DeleteCommand;
+import world.snowcrystal.template.domain.favorite.dto.command.PostFavourAddCommand;
+import world.snowcrystal.template.domain.like.dto.command.PostLikeAddCommand;
 import world.snowcrystal.template.domain.identifier.primitive.Id;
 import world.snowcrystal.template.domain.login.command.LoginCommandService;
 import world.snowcrystal.template.domain.post.entity.Post;
