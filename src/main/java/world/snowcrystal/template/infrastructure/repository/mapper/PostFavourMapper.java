@@ -6,8 +6,8 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.Constants;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import org.apache.ibatis.annotations.Param;
-import world.snowcrystal.template.infrastructure.repository.po.Post;
-import world.snowcrystal.template.infrastructure.repository.po.PostFavour;
+import world.snowcrystal.template.infrastructure.repository.po.PostPO;
+import world.snowcrystal.template.infrastructure.repository.po.PostFavourPO;
 
 /**
  * 文章收藏数据库操作
@@ -15,7 +15,7 @@ import world.snowcrystal.template.infrastructure.repository.po.PostFavour;
  *
  *
  */
-public interface PostFavourMapper extends BaseMapper<PostFavour> {
+public interface PostFavourMapper extends BaseMapper<PostFavourPO> {
 
     /**
      * 分页查询收藏文章列表
@@ -25,8 +25,8 @@ public interface PostFavourMapper extends BaseMapper<PostFavour> {
      * @param favourUserId
      * @return
      */
-    Page<Post> listFavourPostByPage(IPage<Post> page, @Param(Constants.WRAPPER) Wrapper<Post> queryWrapper,
-            long favourUserId);
+    Page<PostPO> listFavourPostByPage(IPage<PostPO> page, @Param(Constants.WRAPPER) Wrapper<PostPO> queryWrapper,
+                                      long favourUserId);
 
 }
 

@@ -1,13 +1,10 @@
 package world.snowcrystal.template.domain.post.entity;
 
-import com.baomidou.mybatisplus.annotation.TableField;
 import lombok.Builder;
 import lombok.Getter;
 import world.snowcrystal.template.domain.identifier.primitive.Id;
-import world.snowcrystal.template.domain.post.type.*;
+import world.snowcrystal.template.domain.post.primitive.*;
 
-import java.io.Serial;
-import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
@@ -16,7 +13,7 @@ import java.util.List;
  */
 @Getter
 @Builder
-public class Post implements Serializable {
+public class Post {
 
     /**
      * id
@@ -73,6 +70,11 @@ public class Post implements Serializable {
         this.likes = new Likes(this.likes.getValue() + 1);
     }
 
+    public Likes incrementLikesAndGet() {
+        this.likes = new Likes(this.likes.getValue() + 1);
+        return this.likes;
+    }
+
     public void decrementLikes() {
         this.likes = new Likes(Math.max(0, this.likes.getValue() - 1));
     }
@@ -80,6 +82,12 @@ public class Post implements Serializable {
     public void incrementFavours() {
         this.favourNum = new Favours(this.favourNum.getValue() + 1);
     }
+
+    public Favours incrementFavoursAndGet() {
+        this.favourNum = new Favours(this.favourNum.getValue() + 1);
+        return this.favourNum;
+    }
+
 
     public void decrementFavours() {
         this.favourNum = new Favours(Math.max(0, this.favourNum.getValue() - 1));
@@ -100,9 +108,15 @@ public class Post implements Serializable {
     public void modifyContent(Content newContent) {
         this.content = newContent;
     }
+    public void modifyTags(List<Tag> newTags) {
+        this.tags = newTags;
+    }
 
+    public void modifyTitle(Title newTitle) {
+        this.title = newTitle;
+    }
+    public void delete(){
+        this.deleted = 1;
+    }
 
-    @TableField(exist = false)
-    @Serial
-    private static final long serialVersionUID = 1L;
 }

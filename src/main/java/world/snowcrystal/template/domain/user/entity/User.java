@@ -57,31 +57,26 @@ public class User implements Serializable {
     /**
      * 用户昵称
      */
-    @Nonnull
     private Username username;
 
     /**
      * 用户头像
      */
-    @Nonnull
     private Avatar avatar;
 
     /**
      * 用户简介
      */
-    @Nonnull
     private Profile profile;
 
     /**
      * 用户角色：user/admin/ban
      */
-    @Nonnull
     private Role role;
 
     /**
      * 创建时间
      */
-    @Nonnull
     @Getter
     @Setter
     @Accessors(chain = true)
@@ -90,7 +85,6 @@ public class User implements Serializable {
     /**
      * 更新时间
      */
-    @Nonnull
     @Getter
     @Setter
     @Accessors(chain = true)
@@ -100,7 +94,6 @@ public class User implements Serializable {
     /**
      * 是否删除
      */
-    @Nonnull
     private Integer deleted;
 
     public void delete() {
@@ -150,10 +143,6 @@ public class User implements Serializable {
 
     public boolean checkIsAdmin() {
         return UserRoleEnum.ADMIN.equals(this.role.getValue());
-    }
-
-    public boolean passwordMatches(Password rawPassword) {
-        return this.password.matches(rawPassword);
     }
 
     public boolean isActivate() {

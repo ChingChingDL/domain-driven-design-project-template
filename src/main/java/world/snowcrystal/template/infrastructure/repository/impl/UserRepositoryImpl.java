@@ -17,7 +17,7 @@ import world.snowcrystal.template.domain.user.repository.UserRepository;
 import world.snowcrystal.template.domain.user.primitive.Account;
 import world.snowcrystal.template.domain.user.primitive.UnionId;
 import world.snowcrystal.template.domain.user.primitive.Username;
-import world.snowcrystal.template.infrastructure.converter.EntityConverter;
+import world.snowcrystal.template.infrastructure.converter.UserConverter;
 import world.snowcrystal.template.infrastructure.repository.mapper.UserMapper;
 import world.snowcrystal.template.infrastructure.repository.po.UserPO;
 import world.snowcrystal.template.infrastructure.utils.SqlUtils;
@@ -33,7 +33,7 @@ public class UserRepositoryImpl extends ServiceImpl<UserMapper, UserPO>
     private UserMapper userMapper;
 
     @Resource
-    private EntityConverter entityConverter;
+    private UserConverter userConverter;
 
 
 
@@ -43,7 +43,7 @@ public class UserRepositoryImpl extends ServiceImpl<UserMapper, UserPO>
         if (user == null) {
             throw new BusinessException(ApplicationResponseStatusCode.NOT_FOUND_ERROR, "User not found");
         }
-        return entityConverter.toEntity(user);
+        return userConverter.toEntity(user);
     }
 
     @Override
@@ -52,7 +52,7 @@ public class UserRepositoryImpl extends ServiceImpl<UserMapper, UserPO>
         queryWrapper.eq("account", account.getValue())
                 .eq("deleted", 0);
         UserPO user = userMapper.selectOne(queryWrapper);
-        return entityConverter.toEntity(user);
+        return userConverter.toEntity(user);
     }
 
     @Override
@@ -61,7 +61,7 @@ public class UserRepositoryImpl extends ServiceImpl<UserMapper, UserPO>
         queryWrapper.eq("username", username.getValue())
                 .eq("deleted", 0);
         UserPO user = userMapper.selectOne(queryWrapper);
-        return entityConverter.toEntity(user);
+        return userConverter.toEntity(user);
     }
 
     @Override
@@ -69,12 +69,12 @@ public class UserRepositoryImpl extends ServiceImpl<UserMapper, UserPO>
         QueryWrapper<UserPO> queryWrapper = new QueryWrapper<>();
         queryWrapper.eq("unionId", unionId.getValue())
                 .eq("deleted", 0);
-        return entityConverter.toEntity(userMapper.selectOne(queryWrapper));
+        return userConverter.toEntity(userMapper.selectOne(queryWrapper));
     }
 
     @Override
     public void save(User user) {
-        userMapper.insert(entityConverter.toPO(user));
+        userMapper.insert(userConverter.toPO(user));
     }
 
 
@@ -99,7 +99,7 @@ public class UserRepositoryImpl extends ServiceImpl<UserMapper, UserPO>
 
     @Override
     public void remove(User user) {
-        UserPO po = entityConverter.toPO(user);
+        UserPO po = userConverter.toPO(user);
         QueryWrapper<UserPO> wrapper = new QueryWrapper<>();
         wrapper.eq("id", po.getId());
         userMapper.delete(wrapper);
@@ -121,7 +121,7 @@ public class UserRepositoryImpl extends ServiceImpl<UserMapper, UserPO>
                 .current(current)
                 .size(size)
                 .total(page.getTotal())
-                .records(page.getRecords().stream().map(entityConverter::toEntity).collect(Collectors.toList()))
+                .records(page.getRecords().stream().map(userConverter::toEntity).collect(Collectors.toList()))
                 .build();
     }
 

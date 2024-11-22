@@ -10,6 +10,8 @@ import world.snowcrystal.template.domain.user.primitive.Username;
 import world.snowcrystal.template.infrastructure.repository.po.UserPO;
 import  world.snowcrystal.template.domain.common.exception.BusinessException;
 
+import java.util.List;
+
 public interface UserRepository {
 
     /**
@@ -23,6 +25,7 @@ public interface UserRepository {
     User load(Username username);
 
     User load(UnionId unionId);
+    List<User> loadBatch(List<Id> ids);
 
     void save(User user);
 

@@ -8,8 +8,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import world.snowcrystal.template.application.service.PostFavourService;
-import world.snowcrystal.template.application.service.PostService;
+import world.snowcrystal.template.domain.post.PostService;
 import world.snowcrystal.template.domain.common.ApplicationResponse;
 import world.snowcrystal.template.domain.common.enums.ApplicationResponseStatusCode;
 import world.snowcrystal.template.domain.common.exception.BusinessException;
@@ -18,9 +17,9 @@ import world.snowcrystal.template.domain.login.command.LoginCommandService;
 import world.snowcrystal.template.domain.post.dto.command.PostFavourAddCommand;
 import world.snowcrystal.template.domain.post.dto.query.PostFavourQuery;
 import world.snowcrystal.template.domain.post.dto.query.PostQuery;
-import world.snowcrystal.template.domain.post.dto.vo.PostVO;
+import world.snowcrystal.template.domain.post.dto.query.PostQueryResponse;
 import world.snowcrystal.template.domain.user.entity.User;
-import world.snowcrystal.template.infrastructure.repository.po.Post;
+import world.snowcrystal.template.infrastructure.repository.po.PostPO;
 
 /**
  * 文章收藏接口
@@ -60,8 +59,8 @@ public class PostFavourController {
      *
      */
     @PostMapping("/my/list/page")
-    public ApplicationResponse<Page<PostVO>> listMyFavourPostByPage(@RequestBody PostQuery postQueryRequest,
-                                                                    HttpServletRequest request) {
+    public ApplicationResponse<Page<PostQueryResponse>> listMyFavourPostByPage(@RequestBody PostQuery postQueryRequest,
+                                                                               HttpServletRequest request) {
         if (postQueryRequest == null) {
             throw new BusinessException(ApplicationResponseStatusCode.PARAMS_ERROR);
         }
@@ -70,7 +69,7 @@ public class PostFavourController {
         long size = postQueryRequest.getSize();
         // 限制爬虫
         ThrowUtils.throwIf(size > 20, ApplicationResponseStatusCode.PARAMS_ERROR);
-        Page<Post> postPage = postFavourService.listFavourPostByPage(new Page<>(current, size),
+        Page<PostPO> postPage = postFavourService.listFavourPostByPage(new Page<>(current, size),
                 postService.getQueryWrapper(postQueryRequest), loginUser.getId().getValue());
         return ApplicationResponse.success(postService.getPostVOPage(postPage, request));
     }
@@ -79,8 +78,8 @@ public class PostFavourController {
      * 获取用户收藏的文章列表
      */
     @PostMapping("/list/page")
-    public ApplicationResponse<Page<PostVO>> listFavourPostByPage(@RequestBody PostFavourQuery postFavourQueryRequest,
-                                                                  HttpServletRequest request) {
+    public ApplicationResponse<Page<PostQueryResponse>> listFavourPostByPage(@RequestBody PostFavourQuery postFavourQueryRequest,
+                                                                             HttpServletRequest request) {
         if (postFavourQueryRequest == null) {
             throw new BusinessException(ApplicationResponseStatusCode.PARAMS_ERROR);
         }
@@ -89,7 +88,7 @@ public class PostFavourController {
         Long userId = postFavourQueryRequest.getUserId();
         // 限制爬虫
         ThrowUtils.throwIf(size > 20 || userId == null, ApplicationResponseStatusCode.PARAMS_ERROR);
-        Page<Post> postPage = postFavourService.listFavourPostByPage(new Page<>(current, size),
+        Page<PostPO> postPage = postFavourService.listFavourPostByPage(new Page<>(current, size),
                 postService.getQueryWrapper(postFavourQueryRequest.getPostQueryRequest()), userId);
         return ApplicationResponse.success(postService.getPostVOPage(postPage, request));
     }

@@ -5,7 +5,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import world.snowcrystal.template.application.assembler.Assembler;
+import world.snowcrystal.template.domain.user.assembler.UserAssembler;
 import world.snowcrystal.template.domain.common.enums.ApplicationResponseStatusCode;
 import world.snowcrystal.template.domain.common.enums.SessionAttributeEnum;
 import world.snowcrystal.template.domain.common.exception.BusinessException;
@@ -35,7 +35,7 @@ public class UserCommandService {
 
 
     @Resource
-    private Assembler assembler;
+    private UserAssembler userAssembler;
 
     public Id createUser(UserCreateCommand userCreateCommand) {
         User user = userFactory.create(userCreateCommand);

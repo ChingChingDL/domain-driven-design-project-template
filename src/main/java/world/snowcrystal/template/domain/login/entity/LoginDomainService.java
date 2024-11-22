@@ -10,6 +10,7 @@ import world.snowcrystal.template.domain.register.entity.RegisterDomainService;
 import world.snowcrystal.template.domain.user.entity.User;
 import world.snowcrystal.template.domain.user.repository.UserRepository;
 import world.snowcrystal.template.domain.user.primitive.*;
+import world.snowcrystal.template.domain.user.service.UserDomainService;
 
 
 @Slf4j
@@ -19,13 +20,14 @@ public class LoginDomainService {
 
     private final UserRepository userRepository;
     private final RegisterDomainService registerDomainService;
+    private final UserDomainService userDomainService;
 
 
     public User userLogin(Account account, Password password) {
         // 查询用户是否存在
         User user = userRepository.load(account);
         // 用户存在检查，密码检查
-        if (user == null || !user.passwordMatches(password)) {
+        if (user == null || !userDomainService.matches(user,password)) {
             log.info("user login failed, account cannot match password");
             throw new BusinessException(ApplicationResponseStatusCode.PARAMS_ERROR, "用户不存在或密码错误");
         }

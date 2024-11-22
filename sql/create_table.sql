@@ -23,7 +23,7 @@ create table if not exists user
 ) comment '用户' collate = utf8mb4_unicode_ci;
 
 -- 文章表
-create table if not exists post
+create table if not exists postPO
 (
     id         bigint auto_increment comment 'id' primary key,
     title      varchar(512)                       null comment '标题',

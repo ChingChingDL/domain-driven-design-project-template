@@ -4,6 +4,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import world.snowcrystal.template.domain.common.enums.ApplicationResponseStatusCode;
 import world.snowcrystal.template.domain.common.exception.BusinessException;
+import world.snowcrystal.template.domain.identifier.component.SnowFlakeIdentifierGenerator;
+import world.snowcrystal.template.domain.identifier.primitive.Id;
 import world.snowcrystal.template.domain.register.component.PasswordEncoder;
 import world.snowcrystal.template.domain.register.component.UserPasswordGenerator;
 import world.snowcrystal.template.domain.register.component.UsernameGenerator;
@@ -27,6 +29,7 @@ public class UserFactory {
     private final UserPasswordGenerator passwordGenerator;
     private final UsernameGenerator usernameGenerator;
     private final PasswordEncoder passwordEncoder;
+    private final SnowFlakeIdentifierGenerator snowFlakeIdentifierGenerator;
 
 
     public User create(Username username, Account account, Avatar avatar) {
@@ -37,6 +40,7 @@ public class UserFactory {
                 .username(username)
                 .account(account)
                 .avatar(avatar)
+                .id(snowFlakeIdentifierGenerator.generate())
                 .password(passwordEncoder.encode(passwordGenerator.generate()))
                 .build();
     }

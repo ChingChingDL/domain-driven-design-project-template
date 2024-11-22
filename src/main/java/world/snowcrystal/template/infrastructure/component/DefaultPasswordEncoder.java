@@ -11,6 +11,6 @@ public class DefaultPasswordEncoder implements PasswordEncoder {
 
     @Override
     public EncodedPassword encode(Password password) {
-        return new EncodedPassword(this, DigestUtil.bcrypt(password.getValue() + SALT));
+        return new EncodedPassword(DigestUtil.bcrypt(password.getValue() + SALT));
     }
 }

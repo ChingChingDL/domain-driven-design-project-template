@@ -1,17 +1,20 @@
 package world.snowcrystal.template.domain.user.service;
 
 import jakarta.annotation.Resource;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.stereotype.Service;
 import world.snowcrystal.template.domain.common.enums.ApplicationResponseStatusCode;
+import world.snowcrystal.template.domain.common.enums.SessionAttributeEnum;
 import world.snowcrystal.template.domain.common.exception.BusinessException;
 import world.snowcrystal.template.domain.management.dto.command.AdminUserUpdateCommand;
+import world.snowcrystal.template.domain.register.component.PasswordEncoder;
 import world.snowcrystal.template.domain.register.component.UserPasswordGenerator;
 import world.snowcrystal.template.domain.register.component.UsernameGenerator;
 import world.snowcrystal.template.domain.user.entity.User;
-import world.snowcrystal.template.domain.user.repository.UserRepository;
 import world.snowcrystal.template.domain.user.primitive.Account;
 import world.snowcrystal.template.domain.user.primitive.Password;
 import world.snowcrystal.template.domain.user.primitive.Username;
+import world.snowcrystal.template.domain.user.repository.UserRepository;
 
 @Service
 public class UserDomainService {
@@ -24,6 +27,9 @@ public class UserDomainService {
 
     @Resource
     private UserPasswordGenerator passwordGenerator;
+
+    @Resource
+    private PasswordEncoder passwordEncoder;
 
     public void changeUsername(User user, Username newUsername) {
         // check replication
@@ -54,11 +60,11 @@ public class UserDomainService {
 
     /**
      * @param password 待验证的密码
-     * @param user     用户
+     * @param user   用户
      * @return true 如果密码匹配
      */
     public boolean matches(User user, Password password) {
-        return user.getPassword().matches(password);
+        return passwordEncoder.encode(password).equals(user.getPassword());
     }
 
 

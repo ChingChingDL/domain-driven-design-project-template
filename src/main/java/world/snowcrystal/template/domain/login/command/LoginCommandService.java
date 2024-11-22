@@ -6,7 +6,7 @@ import lombok.extern.slf4j.Slf4j;
 import me.chanjar.weixin.common.bean.WxOAuth2UserInfo;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
-import world.snowcrystal.template.application.assembler.Assembler;
+import world.snowcrystal.template.domain.user.assembler.UserAssembler;
 import world.snowcrystal.template.domain.user.entity.User;
 import world.snowcrystal.template.domain.common.enums.ApplicationResponseStatusCode;
 import world.snowcrystal.template.domain.common.enums.SessionAttributeEnum;
@@ -21,7 +21,7 @@ import world.snowcrystal.template.domain.user.primitive.Password;
 @RequiredArgsConstructor
 public class LoginCommandService {
     private final LoginDomainService loginDomainService;
-    private final Assembler assembler;
+    private final UserAssembler userAssembler;
 
     @Transactional
     public LoginCommandResponse userLogin(UserLoginCommand userLoginCommand, HttpServletRequest request) {
@@ -30,7 +30,7 @@ public class LoginCommandService {
         User user = loginDomainService.userLogin(account, password);
         // 记录用户的登录态
         request.getSession().setAttribute(SessionAttributeEnum.LOGIN_USER.getValue(), user);
-        return assembler.toLoginUserVO(user);
+        return userAssembler.toLoginUserVO(user);
     }
 
     @Transactional
@@ -47,7 +47,7 @@ public class LoginCommandService {
      * 获取当前登录用户
      */
     public LoginCommandResponse getLoginUser(HttpServletRequest request) {
-        return assembler.toLoginUserVO(getLoginUserEntity(request));
+        return userAssembler.toLoginUserVO(getLoginUserEntity(request));
     }
 
     /**
@@ -60,7 +60,7 @@ public class LoginCommandService {
             return null;
         }
         // 从数据库查询（追求性能的话可以注释，直接走缓存）
-        return assembler.toLoginUserVO(user);
+        return userAssembler.toLoginUserVO(user);
     }
 
     public User getLoginUserEntity(HttpServletRequest request) {
@@ -76,6 +76,6 @@ public class LoginCommandService {
         // 记录用户的登录态
         User user = loginDomainService.loginByMpOpen(wxOAuth2UserInfo);
         request.getSession().setAttribute(SessionAttributeEnum.LOGIN_USER.getValue(), user);
-        return assembler.toLoginUserVO(user);
+        return userAssembler.toLoginUserVO(user);
     }
 }

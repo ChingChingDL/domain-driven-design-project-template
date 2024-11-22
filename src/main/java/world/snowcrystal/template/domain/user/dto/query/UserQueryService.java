@@ -3,7 +3,7 @@ package world.snowcrystal.template.domain.user.dto.query;
 import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-import world.snowcrystal.template.application.assembler.Assembler;
+import world.snowcrystal.template.domain.user.assembler.UserAssembler;
 import world.snowcrystal.template.domain.common.dto.Page;
 import world.snowcrystal.template.domain.common.exception.ThrowUtils;
 import world.snowcrystal.template.domain.user.entity.User;
@@ -29,12 +29,12 @@ public class UserQueryService {
     private UserRepository userRepository;
 
     @Resource
-    private Assembler assembler;
+    private UserAssembler userAssembler;
 
 
     public UserQueryResponse getUserVO(Id id) {
         User user = userRepository.load(id);
-        return assembler.toUserVO(user);
+        return userAssembler.toUserVO(user);
 
     }
     /**

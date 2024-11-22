@@ -6,6 +6,7 @@ import lombok.Builder;
 import java.io.Serial;
 import java.io.Serializable;
 import java.util.List;
+import java.util.stream.Stream;
 
 @Builder
 public class Page<T> implements Serializable {
@@ -27,7 +28,12 @@ public class Page<T> implements Serializable {
      */
     private Long total;
 
-
+    public static <T> Page<T> empty(Class<T> clazz) {
+        return Page.<T>builder().build();
+    }
+    public Stream<T> stream() {
+        return records.stream();
+    }
     @Serial
     private static final long serialVersionUID = 1L;
 }

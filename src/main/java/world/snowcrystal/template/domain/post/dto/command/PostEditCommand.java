@@ -1,5 +1,6 @@
 package world.snowcrystal.template.domain.post.dto.command;
 
+import jakarta.validation.constraints.Min;
 import lombok.Data;
 import world.snowcrystal.template.domain.common.command.Command;
 
@@ -18,6 +19,7 @@ public class PostEditCommand implements Command {
     /**
      * id
      */
+    @Min(0)
     private Long id;
 
     /**
