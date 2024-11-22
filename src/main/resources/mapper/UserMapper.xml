@@ -4,7 +4,7 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="world.snowcrystal.openapi.mapper.UserMapper">
+<mapper namespace="world.snowcrystal.template.infrastructure.repository.mapper.UserMapper">
     <resultMap id="BaseResultMap" type="world.snowcrystal.template.infrastructure.repository.po.UserPO">
         <id property="id" column="id" jdbcType="BIGINT"/>
         <result property="unionId" column="unionId" jdbcType="VARCHAR"/>
@@ -15,12 +15,12 @@
         <result property="userRole" column="userRole" jdbcType="VARCHAR"/>
         <result property="createTime" column="createTime" jdbcType="TIMESTAMP"/>
         <result property="updateTime" column="updateTime" jdbcType="TIMESTAMP"/>
-        <result property="isDelete" column="isDelete" jdbcType="TINYINT"/>
+        <result property="deleted" column="deleted" jdbcType="TINYINT"/>
     </resultMap>
 
     <sql id="Base_Column_List">
         id,unionId,mpOpenId,
         userName,userAvatar,userProfile,
-        userRole,createTime,updateTime,isDelete
+        userRole,createTime,updateTime,deleted
     </sql>
 </mapper>

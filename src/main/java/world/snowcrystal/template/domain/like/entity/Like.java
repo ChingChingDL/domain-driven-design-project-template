@@ -13,4 +13,5 @@ public class Like {
     private Id postId;
     private Id userId;
     private Date createTime;
+    private Date updateTime;
 }

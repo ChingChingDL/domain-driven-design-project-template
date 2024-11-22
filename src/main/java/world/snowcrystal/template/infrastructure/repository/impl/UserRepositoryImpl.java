@@ -43,7 +43,7 @@ public class UserRepositoryImpl extends ServiceImpl<UserMapper, UserPO>
         if (user == null) {
             throw new BusinessException(ApplicationResponseStatusCode.NOT_FOUND_ERROR, "User not found");
         }
-        return userConverter.toEntity(user);
+        return userConverter.domain(user);
     }
 
     @Override
@@ -52,7 +52,7 @@ public class UserRepositoryImpl extends ServiceImpl<UserMapper, UserPO>
         queryWrapper.eq("account", account.getValue())
                 .eq("deleted", 0);
         UserPO user = userMapper.selectOne(queryWrapper);
-        return userConverter.toEntity(user);
+        return userConverter.domain(user);
     }
 
     @Override
@@ -61,7 +61,7 @@ public class UserRepositoryImpl extends ServiceImpl<UserMapper, UserPO>
         queryWrapper.eq("username", username.getValue())
                 .eq("deleted", 0);
         UserPO user = userMapper.selectOne(queryWrapper);
-        return userConverter.toEntity(user);
+        return userConverter.domain(user);
     }
 
     @Override
@@ -69,18 +69,18 @@ public class UserRepositoryImpl extends ServiceImpl<UserMapper, UserPO>
         QueryWrapper<UserPO> queryWrapper = new QueryWrapper<>();
         queryWrapper.eq("unionId", unionId.getValue())
                 .eq("deleted", 0);
-        return userConverter.toEntity(userMapper.selectOne(queryWrapper));
+        return userConverter.domain(userMapper.selectOne(queryWrapper));
     }
 
     @Override
     public List<User> loadBatch(List<Id> ids) {
         return listByIds(ids.stream().map(Id::getValue).distinct().toList())
-                .stream().map(userConverter::toEntity).collect(Collectors.toList());
+                .stream().map(userConverter::domain).collect(Collectors.toList());
     }
 
     @Override
     public void save(User user) {
-        userMapper.insert(userConverter.toPO(user));
+        userMapper.insert(userConverter.persistence(user));
     }
 
 
@@ -105,7 +105,7 @@ public class UserRepositoryImpl extends ServiceImpl<UserMapper, UserPO>
 
     @Override
     public void remove(User user) {
-        UserPO po = userConverter.toPO(user);
+        UserPO po = userConverter.persistence(user);
         QueryWrapper<UserPO> wrapper = new QueryWrapper<>();
         wrapper.eq("id", po.getId());
         userMapper.delete(wrapper);
@@ -127,7 +127,7 @@ public class UserRepositoryImpl extends ServiceImpl<UserMapper, UserPO>
                 .current(current)
                 .size(size)
                 .total(page.getTotal())
-                .records(page.getRecords().stream().map(userConverter::toEntity).collect(Collectors.toList()))
+                .records(page.getRecords().stream().map(userConverter::domain).collect(Collectors.toList()))
                 .build();
     }
 

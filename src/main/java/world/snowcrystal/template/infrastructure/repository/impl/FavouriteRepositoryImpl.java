@@ -1,14 +1,18 @@
 package world.snowcrystal.template.infrastructure.repository.impl;
 
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Repository;
 import world.snowcrystal.template.domain.favorite.entity.Favourite;
 import world.snowcrystal.template.domain.favorite.repository.FavouriteRepository;
 import world.snowcrystal.template.domain.identifier.primitive.Id;
+import world.snowcrystal.template.infrastructure.repository.mapper.PostFavourMapper;
+import world.snowcrystal.template.infrastructure.repository.po.PostFavourPO;
 
 import java.util.List;
 
 @Repository
-public class FavouriteRepositoryImpl implements FavouriteRepository {
+public class FavouriteRepositoryImpl extends ServiceImpl<PostFavourMapper, PostFavourPO>
+        implements FavouriteRepository {
     @Override
     public void save(Favourite favourite) {
         throw new UnsupportedOperationException("Not supported yet.");

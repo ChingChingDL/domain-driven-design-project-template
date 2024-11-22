@@ -3,6 +3,7 @@ package world.snowcrystal.template.application.controller;
 import jakarta.annotation.Resource;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import world.snowcrystal.template.domain.common.ApplicationResponse;
 import world.snowcrystal.template.domain.like.dto.command.*;
@@ -12,6 +13,7 @@ import world.snowcrystal.template.domain.like.dto.query.PostLikeQueryService;
 /**
  * 文章点赞接口
  */
+@Validated
 @RestController
 @RequestMapping("/post/like")
 @Slf4j

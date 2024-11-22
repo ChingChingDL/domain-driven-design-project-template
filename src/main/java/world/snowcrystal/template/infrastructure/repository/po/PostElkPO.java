@@ -47,6 +47,6 @@ public class PostElkPO implements Serializable {
     /**
      * 是否删除
      */
-    private Integer isDelete;
+    private Integer deleted;
 
 }

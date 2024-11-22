@@ -12,6 +12,6 @@ public class Favourite {
     private Id id;
     private Id postId;
     private Id userId;
-
+    private Date updateTime;
     private Date createTime;
 }

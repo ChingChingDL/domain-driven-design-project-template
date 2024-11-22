@@ -13,7 +13,6 @@ import world.snowcrystal.template.domain.common.command.DeleteCommand;
 import world.snowcrystal.template.domain.common.dto.Page;
 import world.snowcrystal.template.domain.identifier.primitive.Id;
 import world.snowcrystal.template.domain.login.command.LoginCommandService;
-import world.snowcrystal.template.domain.post.PostService;
 import world.snowcrystal.template.domain.post.assembler.PostAssembler;
 import world.snowcrystal.template.domain.post.dto.command.PostAddCommand;
 import world.snowcrystal.template.domain.post.dto.command.PostCommandService;
@@ -32,9 +31,6 @@ import world.snowcrystal.template.domain.post.entity.Post;
 @Slf4j
 @Validated
 public class PostController {
-
-    @Resource
-    private PostService postService;
 
     @Resource
     private LoginCommandService loginCommandService;

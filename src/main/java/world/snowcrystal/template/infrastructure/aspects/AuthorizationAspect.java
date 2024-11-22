@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.RequestAttributes;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
-import world.snowcrystal.template.application.annotation.AuthorityCheck;
+import world.snowcrystal.template.domain.login.annotation.AuthorityCheck;
 import world.snowcrystal.template.domain.common.enums.ApplicationResponseStatusCode;
 import world.snowcrystal.template.domain.common.exception.BusinessException;
 import world.snowcrystal.template.domain.login.command.LoginCommandService;

@@ -12,16 +12,16 @@ public interface UserConverter {
     @Mapping(source = "value", target = "value")
     Role map(String value);
 
-    @Mapping(source = "userPO.id", target = "id.value")
-    @Mapping(source = "userPO.account", target = "account.value")
-    @Mapping(source = "userPO.username", target = "username.value")
-    @Mapping(source = "userPO.password", target = "password.value")
-    @Mapping(source = "userPO.unionId", target = "unionId.value")
-    @Mapping(source = "userPO.mpOpenId", target = "mpOpenId.value")
-    @Mapping(source = "userPO.avatar", target = "avatar.value")
-    @Mapping(source = "userPO.profile", target = "profile.value")
+    @Mapping(source = "id", target = "id.value")
+    @Mapping(source = "account", target = "account.value")
+    @Mapping(source = "username", target = "username.value")
+    @Mapping(source = "password", target = "password.value")
+    @Mapping(source = "unionId", target = "unionId.value")
+    @Mapping(source = "mpOpenId", target = "mpOpenId.value")
+    @Mapping(source = "avatar", target = "avatar.value")
+    @Mapping(source = "profile", target = "profile.value")
     @Mapping( target = "role",source = "userPO.role")
-    User toEntity(UserPO userPO);
+    User domain(UserPO userPO);
 
     @Mapping(source = "id.value", target = "id")
     @Mapping(source = "account.value", target = "account")
@@ -32,7 +32,7 @@ public interface UserConverter {
     @Mapping(source = "avatar.value", target = "avatar")
     @Mapping(source = "profile.value", target = "profile")
     @Mapping(source = "role.value", target = "role")
-    UserPO toPO(User user);
+    UserPO persistence(User user);
 
 
 }

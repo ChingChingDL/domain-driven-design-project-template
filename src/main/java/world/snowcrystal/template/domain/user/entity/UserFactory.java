@@ -31,7 +31,6 @@ public class UserFactory {
     private final PasswordEncoder passwordEncoder;
     private final SnowFlakeIdentifierGenerator snowFlakeIdentifierGenerator;
 
-
     public User create(Username username, Account account, Avatar avatar) {
         if (userRepository.checkExists(account)) {
             throw new AccountTakenException("账号已被占用");
@@ -61,6 +60,7 @@ public class UserFactory {
                 .account(account)
                 .username(usernameGenerator.generate())
                 .password(passwordEncoder.encode(password))
+                .id(snowFlakeIdentifierGenerator.generate())
                 .build();
     }
 

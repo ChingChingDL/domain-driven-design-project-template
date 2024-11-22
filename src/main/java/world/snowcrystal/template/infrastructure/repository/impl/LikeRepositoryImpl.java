@@ -1,14 +1,18 @@
 package world.snowcrystal.template.infrastructure.repository.impl;
 
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Repository;
 import world.snowcrystal.template.domain.identifier.primitive.Id;
 import world.snowcrystal.template.domain.like.entity.Like;
 import world.snowcrystal.template.domain.like.repository.LikeRepository;
+import world.snowcrystal.template.infrastructure.repository.mapper.PostThumbMapper;
+import world.snowcrystal.template.infrastructure.repository.po.PostLikePO;
 
 import java.util.List;
 
 @Repository
-public class LikeRepositoryImpl implements LikeRepository {
+public class LikeRepositoryImpl extends ServiceImpl<PostThumbMapper, PostLikePO>
+        implements LikeRepository {
     @Override
     public void save(Like Like) {
         throw new UnsupportedOperationException();
@@ -16,8 +20,6 @@ public class LikeRepositoryImpl implements LikeRepository {
 
     /**
      * 这个文章总共被点赞了多少次
-     *
-     * @param postId
      */
     @Override
     public Long count(Id postId) {
@@ -26,13 +28,12 @@ public class LikeRepositoryImpl implements LikeRepository {
 
     /**
      * 这个用户点赞了多少文章
-     *
-     * @param userId
      */
     @Override
-    public Long countUserFavours(Id userId) {
+    public Long countUserLikes(Id userId) {
         throw new UnsupportedOperationException();
     }
+
 
     @Override
     public boolean exists(Id postId, Id userId) {
@@ -41,8 +42,6 @@ public class LikeRepositoryImpl implements LikeRepository {
 
     /**
      * 都是谁点赞了这篇文章
-     *
-     * @param postId
      */
     @Override
     public List<Like> load(Id postId) {
@@ -62,12 +61,12 @@ public class LikeRepositoryImpl implements LikeRepository {
     /**
      * 这个用户点赞了哪些文章，按照点赞时间倒序，最近的在最前面
      *
-     * @param userId
      */
     @Override
-    public List<Like> loadUserFavours(Id userId) {
+    public List<Like> loadUserLikes(Id userId) {
         throw new UnsupportedOperationException();
     }
+
 
     @Override
     public void remove(Like Like) {

@@ -1,19 +1,14 @@
 package world.snowcrystal.template.domain.post.dto.query;
 
-import cn.hutool.json.JSONUtil;
+import lombok.Data;
 import world.snowcrystal.template.domain.user.dto.query.UserQueryResponse;
-import world.snowcrystal.template.infrastructure.repository.po.PostPO;
+
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
-import lombok.Data;
-import org.springframework.beans.BeanUtils;
 
 /**
  * 文章视图
- *
- *
- *
  */
 @Data
 public class PostQueryResponse implements Serializable {
@@ -36,12 +31,12 @@ public class PostQueryResponse implements Serializable {
     /**
      * 点赞数
      */
-    private Integer thumbNum;
+    private Integer likes;
 
     /**
      * 收藏数
      */
-    private Integer favourNum;
+    private Integer favours;
 
     /**
      * 创建用户 id
@@ -61,51 +56,11 @@ public class PostQueryResponse implements Serializable {
     /**
      * 标签列表
      */
-    private List<String> tagList;
+    private List<String> tags;
 
     /**
      * 创建人信息
      */
     private UserQueryResponse user;
 
-    /**
-     * 是否已点赞
-     */
-    private Boolean hasThumb;
-
-    /**
-     * 是否已收藏
-     */
-    private Boolean hasFavour;
-
-    /**
-     * 包装类转对象
-     *
-     */
-    public static PostPO voToObj(PostQueryResponse postQueryResponse) {
-        if (postQueryResponse == null) {
-            return null;
-        }
-        PostPO postPO = new PostPO();
-        BeanUtils.copyProperties(postQueryResponse, postPO);
-        List<String> tagList = postQueryResponse.getTagList();
-        postPO.setTags(JSONUtil.toJsonStr(tagList));
-        return postPO;
-    }
-
-    /**
-     * 对象转包装类
-     *
-     * @param postPO
-     * @return
-     */
-    public static PostQueryResponse objToVo(PostPO postPO) {
-        if (postPO == null) {
-            return null;
-        }
-        PostQueryResponse postQueryResponse = new PostQueryResponse();
-        BeanUtils.copyProperties(postPO, postQueryResponse);
-        postQueryResponse.setTagList(JSONUtil.toList(postPO.getTags(), String.class));
-        return postQueryResponse;
-    }
 }

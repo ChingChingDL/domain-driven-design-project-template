@@ -72,11 +72,11 @@ public class PostRepositoryImpl extends ServiceImpl<PostMapper, PostPO>
         if (po == null) {
             throw new BusinessException(ApplicationResponseStatusCode.NOT_FOUND_ERROR, "没有找到相应文章");
         }
-        return postConverter.toEntity(po);
+        return postConverter.domain(po);
     }
 
     private PostPO po(Post entity) {
-        return postConverter.toPO(entity);
+        return postConverter.persistence(entity);
     }
 
     @Override

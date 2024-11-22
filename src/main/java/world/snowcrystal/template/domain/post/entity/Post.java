@@ -43,7 +43,7 @@ public class Post {
     /**
      * 收藏数
      */
-    private Favours favourNum;
+    private Favours favours;
 
     /**
      * 创建用户 id
@@ -80,17 +80,17 @@ public class Post {
     }
 
     public void incrementFavours() {
-        this.favourNum = new Favours(this.favourNum.getValue() + 1);
+        this.favours = new Favours(this.favours.getValue() + 1);
     }
 
     public Favours incrementFavoursAndGet() {
-        this.favourNum = new Favours(this.favourNum.getValue() + 1);
-        return this.favourNum;
+        this.favours = new Favours(this.favours.getValue() + 1);
+        return this.favours;
     }
 
 
     public void decrementFavours() {
-        this.favourNum = new Favours(Math.max(0, this.favourNum.getValue() - 1));
+        this.favours = new Favours(Math.max(0, this.favours.getValue() - 1));
     }
 
     public void addTag(Tag tag) {

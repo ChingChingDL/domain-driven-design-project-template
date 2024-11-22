@@ -23,7 +23,7 @@ public class Username {
 
         if (value == null || value.isBlank()) {
             throw new ValidationException("Username must not be blank");
-        } else if (value.length() > 20 || value.length() < 5) {
+        } else if (value.length() < 5 || value.length() > 20 ) {
             throw new ValidationException("用户名长度必须在 5 到 20 个字符之间");
         }// TODO 用户名只能包含汉字、字母、数字，下划线，破折号
 //        else {

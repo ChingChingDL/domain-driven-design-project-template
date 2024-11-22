@@ -18,7 +18,7 @@ import java.util.Date;
  */
 @TableName(value = "post_thumb")
 @Data
-public class PostThumbPO implements Serializable {
+public class PostLikePO implements Serializable {
 
     /**
      * id
@@ -46,6 +46,7 @@ public class PostThumbPO implements Serializable {
      */
     private Date updateTime;
 
-    @TableField(exist = false)@Serial
+    @TableField(exist = false)
+    @Serial
     private static final long serialVersionUID = 1L;
 }

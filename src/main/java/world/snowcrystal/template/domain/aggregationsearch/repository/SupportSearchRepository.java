@@ -1,4 +1,4 @@
-package world.snowcrystal.template.domain.search.repository;
+package world.snowcrystal.template.domain.aggregationsearch.repository;
 
 import world.snowcrystal.template.infrastructure.repository.po.PostElkPO;
 

@@ -1,4 +1,4 @@
-package world.snowcrystal.template.application.annotation;
+package world.snowcrystal.template.domain.login.annotation;
 
 import world.snowcrystal.template.domain.user.enums.UserRoleEnum;
 
